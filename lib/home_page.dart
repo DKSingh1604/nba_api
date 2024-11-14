@@ -9,7 +9,7 @@ import 'package:lottie/lottie.dart';
 import 'package:nba_api/model/team.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({super.key});
+  const HomePage({super.key});
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -56,8 +56,12 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       backgroundColor: const Color.fromARGB(255, 8, 8, 8),
       appBar: AppBar(
-        backgroundColor: Colors.blue,
-        title: Text('NBA teams'),
+        backgroundColor: Colors.transparent,
+        title: Text(
+          'NBA teams',
+          style: TextStyle(color: Colors.white),
+        ),
+        centerTitle: true,
       ),
       body: Stack(
         children: [
@@ -76,7 +80,7 @@ class _HomePageState extends State<HomePage> {
             builder: (context, snapshot) {
               if (snapshot.connectionState == ConnectionState.done) {
                 return ListView.builder(
-                  itemCount: teams.length + 1, // Plus one for the header
+                  itemCount: teams.length, // Plus one for the header
                   itemBuilder: (context, index) {
                     // The header tile
                     if (index == 0) {
@@ -85,6 +89,7 @@ class _HomePageState extends State<HomePage> {
                         child: Container(
                           decoration: BoxDecoration(
                             color: Colors.blue.shade700,
+                            borderRadius: BorderRadius.circular(10),
                           ),
                           child: ListTile(
                             leading: Text(
@@ -121,7 +126,7 @@ class _HomePageState extends State<HomePage> {
                         ),
                       );
                     } else {
-                      index - 2;
+                      index - 1;
                       return Padding(
                         padding: const EdgeInsets.all(15.0),
                         child: Container(
